@@ -1,102 +1,127 @@
+<h1 align="center">AWMate</h1>
+
 <p align="center">
-  <a href="https://awmate.ai">
-    <picture>
-      <source srcset="packages/console/app/src/asset/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
-      <source srcset="packages/console/app/src/asset/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src="packages/console/app/src/asset/logo-ornate-light.svg" alt="AWMate logo">
-    </picture>
-  </a>
-</p>
-<p align="center">The open source AI coding agent.</p>
-<p align="center">
-  <a href="https://awmate.ai/discord"><img alt="Discord" src="https://img.shields.io/discord/1391832426048651334?style=flat-square&label=discord" /></a>
-  <a href="https://www.npmjs.com/package/awmate"><img alt="npm" src="https://img.shields.io/npm/v/awmate?style=flat-square" /></a>
-  <a href="https://github.com/nxtgensec/awmate/actions/workflows/publish.yml"><img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/nxtgensec/awmate/publish.yml?style=flat-square&branch=dev" /></a>
+  An open-source AI development companion for working with real projects from a desktop app, terminal, or web interface.
 </p>
 
----
+<p align="center">
+  <a href="https://github.com/nxtgensec/awmate/releases"><img alt="GitHub release" src="https://img.shields.io/github/v/release/nxtgensec/awmate?style=flat-square" /></a>
+  <a href="https://github.com/nxtgensec/awmate/actions/workflows/typecheck.yml"><img alt="Typecheck" src="https://img.shields.io/github/actions/workflow/status/nxtgensec/awmate/typecheck.yml?branch=main&style=flat-square&label=typecheck" /></a>
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/github/license/nxtgensec/awmate?style=flat-square" /></a>
+</p>
 
-### Installation
+## What is AWMate?
 
-```bash
-# YOLO
-curl -fsSL https://awmate.ai/install | bash
+AWMate is an AI coding workspace designed to understand and operate on the project you select. It combines conversation, code exploration, file editing, command execution, and development workflows in one interface.
 
-# Package managers
-npm i -g awmate@latest        # or bun/pnpm/yarn
-scoop install awmate             # Windows
-choco install awmate             # Windows
-brew install anomalyco/tap/awmate # macOS and Linux (recommended, always up to date)
-brew install awmate              # macOS and Linux (official brew formula, updated less)
-sudo pacman -S awmate            # Arch Linux (Stable)
-paru -S awmate-bin               # Arch Linux (Latest from AUR)
-mise use -g awmate               # Any OS
-nix run nixpkgs#awmate           # or github:nxtgensec/awmate for latest dev branch
-```
+The project includes a native Electron desktop application, a terminal interface, a shared web UI, an API server, and reusable SDK packages.
 
-> [!TIP]
-> Remove versions older than 0.1.x before installing.
+## Highlights
 
-### Desktop App (BETA)
+- Project-aware conversations that stay scoped to the selected folder
+- Desktop, terminal, and web experiences backed by the same core
+- Build and plan agents for implementation and read-only analysis
+- Integrated file, search, terminal, and development tools
+- Multiple sessions and project tabs
+- Windows and WSL integration
+- Extensible provider, plugin, protocol, and SDK packages
+- Open-source and self-hostable
 
-AWMate is also available as a desktop application. Download directly from the [releases page](https://github.com/nxtgensec/awmate/releases) or [awmate.ai/download](https://awmate.ai/download).
+## Install the desktop app
 
-| Platform              | Download                           |
-| --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `awmate-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `awmate-desktop-mac-x64.dmg`     |
-| Windows               | `awmate-desktop-windows-x64.exe` |
-| Linux                 | `.deb`, `.rpm`, or `.AppImage`     |
+Download the latest installer from [GitHub Releases](https://github.com/nxtgensec/awmate/releases).
 
-```bash
-# macOS (Homebrew)
-brew install --cask awmate-desktop
-# Windows (Scoop)
-scoop bucket add extras; scoop install extras/awmate-desktop
-```
+| Platform | Package |
+| --- | --- |
+| Windows x64 | `awmate-desktop-win-x64.exe` |
+| macOS | `.dmg` |
+| Linux | `.AppImage`, `.deb`, or `.rpm` |
 
-#### Installation Directory
+> Releases are the official distribution source for this repository. Availability depends on the artifacts published for each version.
 
-The install script respects the following priority order for the installation path:
+## Run from source
 
-1. `$AWMATE_INSTALL_DIR` - Custom installation directory
-2. `$XDG_BIN_DIR` - XDG Base Directory Specification compliant path
-3. `$HOME/bin` - Standard user binary directory (if it exists or can be created)
-4. `$HOME/.awmate/bin` - Default fallback
+### Requirements
+
+- [Git](https://git-scm.com/)
+- [Bun 1.3 or newer](https://bun.sh/)
 
 ```bash
-# Examples
-AWMATE_INSTALL_DIR=/usr/local/bin curl -fsSL https://awmate.ai/install | bash
-XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://awmate.ai/install | bash
+git clone https://github.com/nxtgensec/awmate.git
+cd awmate
+bun install
 ```
 
-### Agents
+Start the desktop application:
 
-AWMate includes two built-in agents you can switch between with the `Tab` key.
+```bash
+bun run dev:desktop
+```
 
-- **build** - Default, full-access agent for development work
-- **plan** - Read-only agent for analysis and code exploration
-  - Denies file edits by default
-  - Asks permission before running bash commands
-  - Ideal for exploring unfamiliar codebases or planning changes
+Other development modes:
 
-Also included is a **general** subagent for complex searches and multistep tasks.
-This is used internally and can be invoked using `@general` in messages.
+```bash
+bun run dev          # CLI/TUI
+bun run dev:web      # Web interface
+bun run dev:desktop  # Electron desktop app
+```
 
-Learn more about [agents](https://awmate.ai/docs/agents).
+## Build the Windows installer
 
-### Documentation
+From the repository root:
 
-For more info on how to configure AWMate, [**head over to our docs**](https://awmate.ai/docs).
+```bash
+bun install
+bun run --cwd packages/desktop build
+bun run --cwd packages/desktop package:win
+```
 
-### Contributing
+The installer is written to:
 
-If you're interested in contributing to AWMate, please read our [contributing docs](./CONTRIBUTING.md) before submitting a pull request.
+```text
+packages/desktop/dist/awmate-desktop-win-x64.exe
+```
 
-### Building on AWMate
+Platform-specific packaging commands are also available:
 
-If you are working on a project that's related to AWMate and is using "awmate" as part of its name, for example "awmate-dashboard" or "awmate-mobile", please add a note to your README to clarify that it is not built by the AWMate team and is not affiliated with us in any way.
+```bash
+bun run --cwd packages/desktop package:mac
+bun run --cwd packages/desktop package:linux
+```
 
----
+## Repository structure
 
-**Join our community** [Discord](https://discord.gg/awmate) | [X.com](https://x.com/awmate)
+| Path | Purpose |
+| --- | --- |
+| `packages/desktop` | Electron desktop application and installers |
+| `packages/app` | Shared application interface |
+| `packages/ui` | Reusable UI components and styling |
+| `packages/core` | Core domain services |
+| `packages/client` | API client implementation |
+| `packages/protocol` | Public protocol definitions |
+| `packages/sdk` | SDK packages and generated clients |
+
+## Development checks
+
+Run checks from the package you changed, as described in [AGENTS.md](./AGENTS.md). Common examples:
+
+```bash
+bun typecheck
+bun test
+```
+
+Tests must not be run from the repository root.
+
+## Contributing
+
+Contributions are welcome. Read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening an issue or pull request.
+
+Please use conventional commit messages, keep changes focused, and include package-level verification where practical.
+
+## Security
+
+For security guidance and vulnerability reporting, see [SECURITY.md](./SECURITY.md).
+
+## License
+
+AWMate is available under the [MIT License](./LICENSE).
