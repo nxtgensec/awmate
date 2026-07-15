@@ -1,7 +1,7 @@
 {
   "name": "@awmate/desktop",
   "private": true,
-  "version": "1.17.18",
+  "version": "1.17.19",
   "type": "module",
   "license": "MIT",
   "homepage": "https://awmate.ai",
@@ -74,4 +74,3 @@
     "@parcel/watcher-win32-x64": "2.5.1"
   }
 }
-

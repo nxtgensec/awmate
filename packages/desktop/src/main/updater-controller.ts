@@ -2,6 +2,15 @@ import type { UpdaterState } from "@awmate/app/updater"
 
 export type { UpdaterState } from "@awmate/app/updater"
 
+export const UPDATER_POLICY = {
+  allowPrerelease: false,
+  allowDowngrade: false,
+  // The controller owns the download so it can publish one consistent state.
+  autoDownload: false,
+  // Apply a downloaded update during a normal app exit without interrupting work.
+  autoInstallOnAppQuit: true,
+} as const
+
 export type UpdaterReadyRecord = { version: string }
 
 export type UpdaterBackend = {

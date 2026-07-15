@@ -1,5 +1,10 @@
 import { describe, expect, test } from "bun:test"
-import { createUpdaterController, type UpdaterBackend, type UpdaterReadyRecord } from "./updater-controller"
+import {
+  createUpdaterController,
+  UPDATER_POLICY,
+  type UpdaterBackend,
+  type UpdaterReadyRecord,
+} from "./updater-controller"
 
 function setup(input?: { currentVersion?: string; ready?: UpdaterReadyRecord }) {
   const calls: string[] = []
@@ -37,6 +42,15 @@ function setup(input?: { currentVersion?: string; ready?: UpdaterReadyRecord }) 
 }
 
 describe("updater controller", () => {
+  test("downloads in the controller and installs automatically on normal app exit", () => {
+    expect(UPDATER_POLICY).toEqual({
+      allowPrerelease: false,
+      allowDowngrade: false,
+      autoDownload: false,
+      autoInstallOnAppQuit: true,
+    })
+  })
+
   test("checks, downloads, persists, and publishes one authoritative ready state", async () => {
     const app = setup()
     const states: ReturnType<typeof app.controller.getState>[] = []

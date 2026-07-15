@@ -31,13 +31,19 @@ The project includes a native Electron desktop application, a terminal interface
 
 Download the latest installer from [GitHub Releases](https://github.com/nxtgensec/awmate/releases).
 
-| Platform | Package |
-| --- | --- |
-| Windows x64 | `awmate-desktop-win-x64.exe` |
-| macOS | `.dmg` |
-| Linux | `.AppImage`, `.deb`, or `.rpm` |
+| Platform    | Package                        |
+| ----------- | ------------------------------ |
+| Windows x64 | `awmate-desktop-win-x64.exe`   |
+| macOS       | `.dmg`                         |
+| Linux       | `.AppImage`, `.deb`, or `.rpm` |
 
 > Releases are the official distribution source for this repository. Availability depends on the artifacts published for each version.
+
+### Automatic updates
+
+Production desktop builds check the public AWMate GitHub Releases feed automatically. When a newer version is available, AWMate downloads it in the background and installs it during the next normal app exit. This avoids interrupting active work or asking users to download another installer.
+
+Users of older development builds must install one updater-enabled production release manually. Updates after that release are automatic.
 
 ## Run from source
 
@@ -91,15 +97,15 @@ bun run --cwd packages/desktop package:linux
 
 ## Repository structure
 
-| Path | Purpose |
-| --- | --- |
-| `packages/desktop` | Electron desktop application and installers |
-| `packages/app` | Shared application interface |
-| `packages/ui` | Reusable UI components and styling |
-| `packages/core` | Core domain services |
-| `packages/client` | API client implementation |
-| `packages/protocol` | Public protocol definitions |
-| `packages/sdk` | SDK packages and generated clients |
+| Path                | Purpose                                     |
+| ------------------- | ------------------------------------------- |
+| `packages/desktop`  | Electron desktop application and installers |
+| `packages/app`      | Shared application interface                |
+| `packages/ui`       | Reusable UI components and styling          |
+| `packages/core`     | Core domain services                        |
+| `packages/client`   | API client implementation                   |
+| `packages/protocol` | Public protocol definitions                 |
+| `packages/sdk`      | SDK packages and generated clients          |
 
 ## Development checks
 

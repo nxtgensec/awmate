@@ -125,7 +125,7 @@ function getConfig() {
         appId,
         productName: "AWMate Beta",
         protocols: { name: "AWMate Beta", schemes: ["awmate"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "awmate-beta", channel: "latest" },
+        publish: { provider: "github", owner: "nxtgensec", repo: "awmate-beta", channel: "latest" },
         rpm: { packageName: "awmate-beta" },
       }
     }
@@ -135,7 +135,7 @@ function getConfig() {
         appId,
         productName: "AWMate",
         protocols: { name: "AWMate", schemes: ["awmate"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "awmate", channel: "latest" },
+        publish: { provider: "github", owner: "nxtgensec", repo: "awmate", channel: "latest" },
         deb: { fpm: [legacyDesktopEntryFpm] },
         rpm: { packageName: "awmate", fpm: [legacyDesktopEntryFpm] },
       }
